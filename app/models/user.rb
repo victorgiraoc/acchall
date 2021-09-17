@@ -5,11 +5,11 @@ class User < ApplicationRecord
     has_many :chats, through: :subscriptions
 
     def existing_chats_users
-        existing_chats_users = []
+        existing_chat_users = []
         self.chats.each do |chat|
-        existing_chats_users.concat(chat.subscriptions.where.not(user_id: self.id).map {|subscription| subscription.user})
+        existing_chat_users.concat(chat.subscriptions.where.not(user_id: self.id).map {|subscription| subscription.user})
         end
         
-        existing_chats_users.uniq
+        existing_chat_users.uniq
     end    
 end

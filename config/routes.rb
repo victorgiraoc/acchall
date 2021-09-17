@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  root to: "users#index"
+  root to: "chats#index"
   get 'users/index'
-  get 'chats/show'
-  resources :users
+  resources :users  do
+    resources :chats, only: [:index, :show, :create]
+  end
   resources :sessions, only:[:new, :destroy, :create]
+  resources :messages, only:[:create]
   mount ActionCable.server => '/cable'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
